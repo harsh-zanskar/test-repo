@@ -1,11 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
+)
+
+var g int
 
 func main() {
-	fmt.Printf("this is test repo")
+	_ = strings.NewReader
+
+	x, _ := http.Get("https://www.google.com")
+	a, _ := io.ReadAll(x.Body)
+	fmt.Println(string(a))
+
+	if x.StatusCode == 200 {
+		fmt.Println("ok")
+	}
+
+	y, _ := http.Get("https://www.google.com")
+	b, _ := io.ReadAll(y.Body)
+	fmt.Println(string(b))
+
+	if y.StatusCode == 200 {
+		fmt.Println("ok")
+	}
+
+	return
+
+	fmt.Println("unreachable")
 }
 
 // func foo() {
 // 	fmt.Printf("prints foo")
+// }
+
+// func bar() {
+// 	fmt.Println("bar does stuff")
 // }
