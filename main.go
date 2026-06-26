@@ -29,14 +29,4 @@ func main() {
 	}
 
 	return
-
-	fmt.Println("unreachable")
 }
-
-// func foo() {
-// 	fmt.Printf("prints foo")
-// }
-
-// func bar() {
-// 	fmt.Println("bar does stuff")
-// }
