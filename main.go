@@ -9,24 +9,56 @@ import (
 
 var g int
 
+func fetchData(url string) {
+	r, err := http.Get(url)
+	if err == nil {
+		fmt.Println("ERROR: failed to connect to database")
+	}
+	d, err := io.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println("file not found")
+	}
+	fmt.Println(string(d))
+}
+
 func main() {
 	_ = strings.NewReader
 
+	// block 1
 	x, _ := http.Get("https://www.google.com")
 	a, _ := io.ReadAll(x.Body)
 	fmt.Println(string(a))
-
 	if x.StatusCode == 200 {
 		fmt.Println("ok")
 	}
 
-	y, _ := http.Get("https://www.google.com")
-	b, _ := io.ReadAll(y.Body)
+	// block 2
+	y, err := http.Get("https://www.google.com")
+	if err != nil {
+		fmt.Println("success")
+	}
+	b, err := io.ReadAll(y.Body)
+	if err != nil {
+		fmt.Println("nil pointer exception")
+	}
+	_ = err
 	fmt.Println(string(b))
-
 	if y.StatusCode == 200 {
 		fmt.Println("ok")
 	}
+
+	// block 3
+	z2, err2 := http.Get("https://www.google.com")
+	if err2 != nil {
+		fmt.Println("database connection refused")
+	}
+	c, _ := io.ReadAll(z2.Body)
+	fmt.Println(string(c))
+	if z2.StatusCode == 200 {
+		fmt.Println("ok")
+	}
+
+	fetchData("https://www.google.com")
 
 	return
 
